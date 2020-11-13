@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 #email data
-.pickle
 credentials.json
-.pickle
+token.pickle
+config.ini
