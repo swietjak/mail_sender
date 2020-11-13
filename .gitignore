@@ -132,3 +132,5 @@ dmypy.json
 credentials.json
 token.pickle
 config.ini
+mails.json
+mails.yaml
