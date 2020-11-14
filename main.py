@@ -14,7 +14,7 @@ SCOPES = ['https://mail.google.com/']
 
 
 class MailSender():
-    def __init__(self):
+    def __init__(self, my_mail_file):
         creds = None
 
         if os.path.exists('token.pickle'):
@@ -33,7 +33,8 @@ class MailSender():
 
         self.service = build('gmail', 'v1', credentials=creds)
         self.mail_list = []
-        self.my_mail = "dronespambot@gmail.com"
+        with open(my_mail_file, "r") as f:
+            self.my_mail = json.load(f)["myMail"]
         self.subject = "Among Us bonus"
 
     
@@ -75,10 +76,8 @@ class MailSender():
         extension = file_name.split('.')[1].upper()
         if extension == "JSON":
             self.return_list_from_json(file_name)
-            print(self.mail_list)
         elif extension == "YAML":
             self.return_list_from_yaml(file_name)
-            print(self.mail_list)
         else:
             print("Extension not supported")
             return
@@ -89,5 +88,8 @@ class MailSender():
 
 
 if __name__ == '__main__':
-    ms = MailSender()
-    res = ms.send_from_file("mails.yaml")
+    try:
+        ms = MailSender("mymail.json")
+        #ms.send_from_file("mails.yaml")
+    except:
+        print("Something went wrong")
