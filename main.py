@@ -90,6 +90,6 @@ class MailSender():
 if __name__ == '__main__':
     try:
         ms = MailSender("mymail.json")
-        #ms.send_from_file("mails.yaml")
+        ms.send_from_file("mails.yaml")
     except:
         print("Something went wrong")
